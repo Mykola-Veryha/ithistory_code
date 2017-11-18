@@ -245,7 +245,8 @@ $terms = array('Other',
 	);
 $keys_terms = array();
 foreach ($terms as $name) {
-	$term = taxonomy_get_term_by_name($name, 12);
+	$term_items = taxonomy_get_term_by_name($name, 12);
+	$term = reset($term_items);
 	$keys_terms[$term->tid] = $term->name;
 }
 
