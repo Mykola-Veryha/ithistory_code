@@ -126,10 +126,22 @@ $transfer_terms = array(
 	349 => 348,
 	376 => 377,
 	);
+set_time_limit(0);
+foreach ($transfer_terms as $old_key => $new_key) {
+	$query = db_select('field_data_field_software_type', 't');
+	$query->condition('t.field_software_type_tid', $old_key);
+	$query->fields('t', array('entity_id', 'revision_id', 'delta'));
+	$results = $query->execute()->fetchAll();
 
-foreach ($merge_terms as $name => $new_key) {
-	$old_key = array_search($name, $old_terms);
-	$keys_terms[$old_key] = $new_key;
+	foreach ($results as  $software_type) {
+		$execute = db_update('field_data_field_software_type')
+		->fields(array(
+			'field_software_type_tid' => $new_key,
+			))
+		->condition('entity_id', $software_type->entity_id)
+		->condition('revision_id', $software_type->revision_id)
+		->condition('delta', $software_type->delta)
+		->execute();
+	}
 }
 
-dpm($transfer_terms);
