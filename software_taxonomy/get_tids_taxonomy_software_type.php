@@ -245,9 +245,11 @@ $terms = array('Other',
 	);
 $keys_terms = array();
 foreach ($terms as $name) {
-	$term_items = taxonomy_get_term_by_name($name, 12);
-	$term = reset($term_items);
-	$keys_terms[$term->tid] = $term->name;
+	$term_items = taxonomy_get_term_by_name($name, 'software_type');
+	if(!empty($term_items)){
+		$term = reset($term_items);
+		$keys_terms[$term->tid] = $term->name;
+	}
 }
 
 dpm($keys_terms);

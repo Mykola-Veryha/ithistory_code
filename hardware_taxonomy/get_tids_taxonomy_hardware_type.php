@@ -49,8 +49,10 @@ $terms = array(
 $keys_terms = array();
 foreach ($terms as $name) {
 	$term_items = taxonomy_get_term_by_name($name, 'hardware_type');
-	$term = reset($term_items);
-	$keys_terms[$term->tid] = $term->name;
+	if(!empty($term_items)){
+		$term = reset($term_items);
+		$keys_terms[$term->tid] = $term->name;
+	}
 }
 
 dpm($keys_terms);

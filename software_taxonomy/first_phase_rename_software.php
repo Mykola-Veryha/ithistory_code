@@ -410,7 +410,9 @@ $new_name_terms = array('-OTHER-',
 $new_terms = array_combine($terms, $new_name_terms);
 
 foreach ($new_terms as $old_name => $new_name) {
-	$term = taxonomy_get_term_by_name($name, 12);
-	$keys_terms[$term->tid] = $term->name;
+	$term = taxonomy_get_term_by_name($name, 'software_type');
+	if(!empty($term)){
+		$keys_terms[$term->tid] = $term->name;
+	}
 }
 dpm($new_terms);

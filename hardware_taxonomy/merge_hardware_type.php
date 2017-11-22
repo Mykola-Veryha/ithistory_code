@@ -20,6 +20,7 @@ $transfer_terms = array(
 	78 => 69,
 	79 => 69,
 	81 => 69,
+	74 => 62,
 	);
 set_time_limit(0);
 foreach ($transfer_terms as $old_key => $new_key) {

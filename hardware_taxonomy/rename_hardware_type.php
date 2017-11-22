@@ -48,7 +48,9 @@ $terms = array(
 
 foreach ($terms as $old_name => $new_name) {
 	$term_items = taxonomy_get_term_by_name($old_name, 'hardware_type');
-	$term = reset($term_items);
-	$term->name = $new_name;
-	taxonomy_term_save($term);
+  if(!empty($term_items)){
+  	$term = reset($term_items);
+  	$term->name = $new_name;
+  	taxonomy_term_save($term);
+  }
 }
